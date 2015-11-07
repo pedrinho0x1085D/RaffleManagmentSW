@@ -42,11 +42,11 @@ public class Timer {
     }
 
     public int getRealSeconds() {
-        return (this.seconds - (this.getMinutes() * 60));
+        return (this.seconds - (this.getMinutes() * 60)-(this.getHours()*3600));
     }
 
     public boolean isOn() {
-        return this.seconds != 0;
+        return this.seconds > 0;
     }
 
     public String toString() {

@@ -13,6 +13,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TreeSet;
 
 /**
  *
@@ -87,6 +88,21 @@ public class TicketMap {
         oos.writeObject(this);
     }
 
+    public TreeSet<Ticket> getFullTickets(){
+        TreeSet<Ticket> res = new TreeSet<>(new TicketComparator());
+        for(Ticket t:this.fullMap.values())
+            res.add(t.clone());
+        return res;
+    }
+
+    
+    public TreeSet<Ticket> getDinnerTickets(){
+        TreeSet<Ticket> res = new TreeSet<>(new TicketComparator());
+        for(Ticket t:this.dinnerMap.values())
+            res.add(t.clone());
+        return res;
+    }
+    
     public static TicketMap loadFile() throws FileNotFoundException, IOException, ClassNotFoundException {
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream("data.obj"));
         TicketMap tm = (TicketMap) ois.readObject();
