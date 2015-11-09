@@ -5,11 +5,13 @@
  */
 package Business;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Pedro Cunha
  */
-public class Timer {
+public class Timer implements Serializable{
 
     int seconds;
 

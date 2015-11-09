@@ -5,11 +5,13 @@
  */
 package Business;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Pedro Cunha
  */
-public class Ticket {
+public class Ticket implements Serializable{
 
     private int id;
     private String name;
