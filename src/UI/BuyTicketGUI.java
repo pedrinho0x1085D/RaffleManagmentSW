@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 public class BuyTicketGUI extends javax.swing.JFrame {
 
     private MainScreenGUI mainscr;
+    private static int howmany=1;
 
     /**
      * Creates new form BuyTicketGUI
@@ -26,6 +27,11 @@ public class BuyTicketGUI extends javax.swing.JFrame {
     public BuyTicketGUI(MainScreenGUI mainscr) {
         initComponents();
         this.mainscr = mainscr;
+        if (this.mainscr.mapa == null) {
+            howmany = 1;
+        } else {
+            howmany = this.mainscr.mapa.getFullMap().size()+2;
+        }
     }
 
     /**
@@ -53,7 +59,7 @@ public class BuyTicketGUI extends javax.swing.JFrame {
 
         jLabel1.setText("Nº da rifa");
 
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(howmany, 0, null, 1));
 
         jLabel2.setText("Nome");
 

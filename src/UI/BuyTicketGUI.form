@@ -88,8 +88,8 @@
     </Component>
     <Component class="javax.swing.JSpinner" name="jSpinner1">
       <Properties>
-        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-          <SpinnerModel initial="1" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
+        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.SpinnerNumberModel(howmany, 0, null, 1)" type="code"/>
         </Property>
       </Properties>
     </Component>

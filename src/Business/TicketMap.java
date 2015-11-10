@@ -104,6 +104,14 @@ public class TicketMap implements Serializable{
         return res;
     }
     
+    public void nullifyNormalTicket(int id){
+        this.fullMap.remove(id);
+    }
+    public void nullifyDinnerTicket(int id){
+        this.fullMap.remove(id);
+        this.dinnerMap.remove(id);
+    }
+    
     public static TicketMap loadFile() throws FileNotFoundException, IOException, ClassNotFoundException {
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream("data.obj"));
         TicketMap tm = (TicketMap) ois.readObject();
