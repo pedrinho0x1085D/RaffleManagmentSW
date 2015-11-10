@@ -25,22 +25,23 @@ public class ListTicketsGUI extends javax.swing.JFrame {
     }
 
     public void fillData() {
-        /*
-        Ticket[] res = (Ticket[])this.tickets.toArray();
+        
+        Object[] res = this.tickets.toArray();
         String[][] auxil = new String[(res.length / 10) + 1][10];
         Ticket objaux = new Ticket(1, "Rnd", 000000000);
-        for (int i = 0; i < res.length; i++) {
-            for (int j = 0; j < 10; j++) {
+        for (int i = 0; i <= res.length/10; i++) {
+            for (int j = 0; j < res.length && j<10; j++) {
                 objaux = ((Ticket) (res[(i * 10) + j]));
-                auxil[i][j] = objaux.getId() + "\n" + objaux.getName();
+                auxil[i][j] = objaux.getId() + " - " + objaux.getName();
             }
         }
-        DefaultTableModel dtm = new DefaultTableModel();
-        for (String[] aux : auxil) {
+        Object[] header={"","","","","","","","",""};
+        DefaultTableModel dtm = new DefaultTableModel(header,1);
+        for(String[] aux:auxil)
             dtm.addRow(aux);
-        }
+        
         jTable1.setModel(dtm);
-*/
+
     }
 
     /**
@@ -87,16 +88,18 @@ public class ListTicketsGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addContainerGap(41, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(0, 569, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addGap(20, 20, 20))
         );

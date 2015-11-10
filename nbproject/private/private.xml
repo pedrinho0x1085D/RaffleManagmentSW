@@ -5,6 +5,9 @@
         <group>
             <file>file:/C:/Users/PedroJosé/Documents/GitHub/RaffleManagmentSW/src/UI/BuyTicketGUI.java</file>
             <file>file:/C:/Users/PedroJosé/Documents/GitHub/RaffleManagmentSW/src/UI/MainScreenGUI.java</file>
+            <file>file:/C:/Users/PedroJosé/Documents/GitHub/RaffleManagmentSW/src/UI/NullifyTicketGUI.java</file>
+            <file>file:/C:/Users/PedroJosé/Documents/GitHub/RaffleManagmentSW/src/UI/ListTicketsGUI.java</file>
+            <file>file:/C:/Users/PedroJosé/Documents/GitHub/RaffleManagmentSW/src/Business/TicketMap.java</file>
         </group>
     </open-files>
 </project-private>
