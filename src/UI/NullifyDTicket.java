@@ -104,7 +104,7 @@ public class NullifyDTicket extends javax.swing.JFrame {
         try {
             this.gui.map.nullifyDinnerTicket((int) jSpinner1.getValue());
             this.gui.map.saveFile();
-            this.gui.updateLabels(this.gui.map.getFullMap().get(this.gui.map.getFullMap().size()).getName());
+            this.gui.updateLabels("");
             this.dispose();
         } catch (IOException ex) {
             Logger.getLogger(NullifyTicketGUI.class.getName()).log(Level.SEVERE, null, ex);
