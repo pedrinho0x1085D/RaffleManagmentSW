@@ -50,8 +50,13 @@ public class Timer implements Serializable{
     public boolean isOn() {
         return this.seconds > 0;
     }
+    
+    private String getClockRepresentation(int whatever){
+        if(whatever<10) return "0"+whatever;
+        else return whatever+"";
+    }
 
     public String toString() {
-        return this.getHours() + ":" + this.getMinutes() + ":" + this.getRealSeconds();
+        return getClockRepresentation(this.getHours()) + ":" + getClockRepresentation(this.getMinutes()) + ":" + getClockRepresentation(this.getRealSeconds());
     }
 }

@@ -32,6 +32,11 @@ public class DSorteioThread implements Runnable{
         fsg.jLabel1.setVisible(true);
         for (int i = 0; i < 15; i++) {
             fsg.jLabel1.setText(idents.get(rng.nextInt(idents.size() - 1)) + "");
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(FullSorteioGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         for (int i = 0; i < 10; i++) {
             fsg.jLabel1.setText(idents.get(rng.nextInt(idents.size() - 1)) + "");

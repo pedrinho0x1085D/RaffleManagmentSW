@@ -6,7 +6,7 @@
 package UI;
 
 import Business.Ticket;
-import java.util.ArrayList;
+import java.awt.Font;
 import java.util.TreeSet;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,25 +21,35 @@ public class ListTicketsGUI extends javax.swing.JFrame {
     public ListTicketsGUI(TreeSet<Ticket> tickets) {
         initComponents();
         this.tickets = tickets;
+        jTable1.setFont(new Font("Tahoma", Font.BOLD, 16));
+        this.setExtendedState(MAXIMIZED_BOTH);
         fillData();
     }
 
     public void fillData() {
-        
+
         Object[] res = this.tickets.toArray();
         String[][] auxil = new String[(res.length / 10) + 1][10];
         Ticket objaux = new Ticket(1, "Rnd", 000000000);
-        for (int i = 0; i <= res.length/10; i++) {
-            for (int j = 0; j < res.length && j<10; j++) {
+        for (int i = 0; i <= res.length / 10; i++) {
+            for (int j = 0; j < res.length && j < 10; j++) {
                 objaux = ((Ticket) (res[(i * 10) + j]));
                 auxil[i][j] = objaux.getId() + " - " + objaux.getName();
             }
         }
-        Object[] header={"","","","","","","","",""};
-        DefaultTableModel dtm = new DefaultTableModel(header,1);
-        for(String[] aux:auxil)
+        Object[] header = {"", "", "", "", "", "", "", "", ""};
+        DefaultTableModel dtm = new DefaultTableModel(header, 1) {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //Only the third column
+                return false;
+            }
+        };
+        for (String[] aux : auxil) {
             dtm.addRow(aux);
-        
+        }
+
         jTable1.setModel(dtm);
 
     }
@@ -71,6 +81,7 @@ public class ListTicketsGUI extends javax.swing.JFrame {
                 "", "", "", "", "", "", "", "", "", "", "", "", "", ""
             }
         ));
+        jTable1.setRowSelectionAllowed(false);
         jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
