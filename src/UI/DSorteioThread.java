@@ -31,7 +31,7 @@ public class DSorteioThread implements Runnable{
         fsg.jLabel1.setText("1");
         fsg.jLabel1.setVisible(true);
         for (int i = 0; i < 15; i++) {
-            fsg.jLabel1.setText(idents.get(rng.nextInt(idents.size() - 1)) + "");
+            fsg.jLabel1.setText(idents.get(rng.nextInt(idents.size())) + "");
             try {
                 Thread.sleep(100);
             } catch (InterruptedException ex) {
@@ -39,7 +39,7 @@ public class DSorteioThread implements Runnable{
             }
         }
         for (int i = 0; i < 10; i++) {
-            fsg.jLabel1.setText(idents.get(rng.nextInt(idents.size() - 1)) + "");
+            fsg.jLabel1.setText(idents.get(rng.nextInt(idents.size())) + "");
             try {
                 Thread.sleep(250);
             } catch (InterruptedException ex) {
@@ -47,7 +47,7 @@ public class DSorteioThread implements Runnable{
             }
         }
         for (int i = 0; i < 5; i++) {
-            fsg.jLabel1.setText(idents.get(rng.nextInt(idents.size() - 1)) + "");
+            fsg.jLabel1.setText(idents.get(rng.nextInt(idents.size())) + "");
             try {
                 Thread.sleep(500);
             } catch (InterruptedException ex) {
@@ -55,7 +55,7 @@ public class DSorteioThread implements Runnable{
             }
         }
         for( int i=0;i<2;i++){
-            fsg.jLabel1.setText(idents.get(rng.nextInt(idents.size()-1))+"");
+            fsg.jLabel1.setText(idents.get(rng.nextInt(idents.size()))+"");
             try {
                 Thread.sleep(750);
             } catch (InterruptedException ex) {

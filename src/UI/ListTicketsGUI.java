@@ -27,17 +27,21 @@ public class ListTicketsGUI extends javax.swing.JFrame {
     }
 
     public void fillData() {
-
+        int i=0, j=0;
         Object[] res = this.tickets.toArray();
         String[][] auxil = new String[(res.length / 10) + 1][10];
-        Ticket objaux = new Ticket(1, "Rnd", 000000000);
-        for (int i = 0; i <= res.length / 10; i++) {
-            for (int j = 0; j < res.length && j < 10; j++) {
+        Ticket objaux = null;
+        for (i = 0; i < (res.length / 10) || i == 0; i++) {
+            for (j = 0; j < res.length && j < 10; j++) {
                 objaux = ((Ticket) (res[(i * 10) + j]));
                 auxil[i][j] = objaux.getId() + " - " + objaux.getName();
             }
         }
-        Object[] header = {"", "", "", "", "", "", "", "", ""};
+        if (j != 9) {
+            for(;j<10;j++)
+                auxil[i][j]="";
+        }
+        Object[] header = {"", "", "", "", "", "", "", "", "",""};
         DefaultTableModel dtm = new DefaultTableModel(header, 1) {
 
             @Override
