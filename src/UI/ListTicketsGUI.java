@@ -8,6 +8,7 @@ package UI;
 import Business.Ticket;
 import java.awt.Font;
 import java.util.TreeSet;
+import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,40 +22,17 @@ public class ListTicketsGUI extends javax.swing.JFrame {
     public ListTicketsGUI(TreeSet<Ticket> tickets) {
         initComponents();
         this.tickets = tickets;
-        jTable1.setFont(new Font("Tahoma", Font.BOLD, 16));
-        this.setExtendedState(MAXIMIZED_BOTH);
+        jList1.setFont(new Font("Tahoma", Font.BOLD, 20));
+        this.setExtendedState(MAXIMIZED_VERT);
         fillData();
     }
 
     public void fillData() {
-        int i=0, j=0;
-        Object[] res = this.tickets.toArray();
-        String[][] auxil = new String[(res.length / 10) + 1][10];
-        Ticket objaux = null;
-        for (i = 0; i < (res.length / 10) || i == 0; i++) {
-            for (j = 0; j < res.length && j < 10; j++) {
-                objaux = ((Ticket) (res[(i * 10) + j]));
-                auxil[i][j] = objaux.getId() + " - " + objaux.getName();
-            }
-        }
-        if (j != 9) {
-            for(;j<10;j++)
-                auxil[i][j]="";
-        }
-        Object[] header = {"", "", "", "", "", "", "", "", "",""};
-        DefaultTableModel dtm = new DefaultTableModel(header, 1) {
-
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                //Only the third column
-                return false;
-            }
-        };
-        for (String[] aux : auxil) {
-            dtm.addRow(aux);
-        }
-
-        jTable1.setModel(dtm);
+        DefaultListModel<String> dtm = new DefaultListModel<>();
+        for(Ticket t: this.tickets)
+            dtm.addElement(t.getId()+" - "+t.getName());
+        
+        jList1.setModel(dtm);
 
     }
 
@@ -67,27 +45,12 @@ public class ListTicketsGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Rifas");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "", "", "", "", "", "", "", "", "", "", "", "", "", ""
-            }
-        ));
-        jTable1.setRowSelectionAllowed(false);
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("Sair");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -95,6 +58,13 @@ public class ListTicketsGUI extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(jList1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,16 +75,16 @@ public class ListTicketsGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
-                        .addGap(0, 569, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
+                        .addGap(0, 289, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
                 .addGap(20, 20, 20))
         );
@@ -164,7 +134,7 @@ public class ListTicketsGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }
