@@ -28,10 +28,41 @@ public class ListTicketsGUI extends javax.swing.JFrame {
     }
 
     public void fillData() {
+        /*
+        int i=0, j=0;
+Object[] res = this.tickets.toArray();
+String[][] auxil = new String[(res.length / 10) + 1][10];
+Ticket objaux = null;
+for (i = 0; i < (res.length / 10) || i == 0; i++) {
+  for (j = 0; j < res.length && j < 10; j++) {
+        objaux = ((Ticket) (res[(i * 10) + j]));
+        auxil[i][j] = objaux.getId() + " - " + objaux.getName();
+   }
+}
+if (j != 9) {
+           for(;j<10;j++)
+              auxil[i][j]="";
+      }
+      Object[] header = {"", "", "", "", "", "", "", "", "",""};
+DefaultTableModel dtm = new DefaultTableModel(header, 1) {
+
+  @Override
+      public boolean isCellEditable(int row, int column) {
+                            //Only the third column
+                        return false;
+    	             }
+		         };
+    for (String[] aux : auxil) {
+              dtm.addRow(aux);
+  		         }
+	         jTable1.setModel(dtm);
+
+         */
         DefaultListModel<String> dtm = new DefaultListModel<>();
-        for(Ticket t: this.tickets)
-            dtm.addElement(t.getId()+" - "+t.getName());
-        
+        for (Ticket t : this.tickets) {
+            dtm.addElement(t.getId() + " - " + t.getName());
+        }
+
         jList1.setModel(dtm);
 
     }
