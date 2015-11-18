@@ -22,16 +22,17 @@ public class BuyDTicket extends javax.swing.JFrame {
 
     private static int howmany = 1;
     private CountDownGUI gui;
+
     /**
      * Creates new form BuyDTicket
      */
     public BuyDTicket(CountDownGUI cdg) {
         initComponents();
-        this.gui=cdg;
+        this.gui = cdg;
         if (this.gui.map == null) {
             howmany = 1;
         } else {
-            howmany = this.gui.map.getFullMap().size()+2;
+            howmany = this.gui.map.getLastInsertedId()+1;
         }
     }
 
@@ -141,18 +142,15 @@ public class BuyDTicket extends javax.swing.JFrame {
         if (jTextField1.getText().equals("") || jFormattedTextField2.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos", "Atenção", JOptionPane.ERROR_MESSAGE);
         } else {
+
+            this.gui.map.insertDinnerTicket(new Ticket((int) jSpinner1.getValue(), jTextField1.getText(), Integer.parseInt(jFormattedTextField2.getText())));
             try {
-                this.gui.map.insertDinnerTicket(new Ticket((int) jSpinner1.getValue(), jTextField1.getText(), Integer.parseInt(jFormattedTextField2.getText())));
-                try {
-                    this.gui.map.saveFile();
-                } catch (IOException ex) {
-                    Logger.getLogger(BuyTicketGUI.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                this.gui.updateLabels(jTextField1.getText());
-                this.dispose();
-            } catch (ExistingIDException ex) {
-                JOptionPane.showMessageDialog(null, "Esse código já existe", "Atenção", JOptionPane.ERROR_MESSAGE);
+                this.gui.map.saveFile();
+            } catch (IOException ex) {
+                Logger.getLogger(BuyTicketGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
+            this.gui.updateLabels(jTextField1.getText());
+            this.dispose();
 
         }
     }//GEN-LAST:event_jButton1ActionPerformed

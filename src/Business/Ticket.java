@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author Pedro Cunha
  */
-public class Ticket implements Serializable{
+public class Ticket implements Serializable {
 
     private int id;
     private String name;
@@ -21,6 +21,12 @@ public class Ticket implements Serializable{
         this.id = id;
         this.name = name;
         this.contact = contact;
+    }
+
+    public Ticket(int id) {
+        this.id = id;
+        this.name = new String();
+        this.contact = 000000000;
     }
 
     public int getId() {
@@ -51,6 +57,10 @@ public class Ticket implements Serializable{
         return new String(this.id + " " + this.name + " " + this.contact);
     }
 
+    public boolean isSold() {
+        return !(this.name.equals(""));
+    }
+
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -61,8 +71,8 @@ public class Ticket implements Serializable{
             return this.id == t.getId() && this.name.equals(t.getName()) && this.contact == t.getContact();
         }
     }
-    
-    public Ticket clone(){
-        return new Ticket(this.id,this.name,this.contact);
+
+    public Ticket clone() {
+        return new Ticket(this.id, this.name, this.contact);
     }
 }

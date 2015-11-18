@@ -27,7 +27,7 @@ public class NullifyTicketGUI extends javax.swing.JFrame {
         if (this.mainscr.mapa == null) {
             howmany = 1;
         } else {
-            howmany = this.mainscr.mapa.getFullMap().size();
+            howmany = this.mainscr.mapa.getLastInsertedId();
         }
     }
 

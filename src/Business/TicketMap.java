@@ -20,20 +20,48 @@ import java.util.TreeSet;
  *
  * @author Pedro Cunha
  */
-public class TicketMap implements Serializable{
+public class TicketMap implements Serializable {
 
     private HashMap<Integer, Ticket> fullMap;
     private HashMap<Integer, Ticket> dinnerMap;
+    private int lastInsertedId;
 
     public TicketMap() {
         this.fullMap = new HashMap<>();
         this.dinnerMap = new HashMap<>();
+        this.lastInsertedId = 0;
+    }
+
+    public TicketMap(int howMany) {
+        this.fullMap = new HashMap<>();
+        this.dinnerMap = new HashMap<>();
+        for (int i = 1; i <= howMany; i++) {
+            this.fullMap.put(i, new Ticket(i));
+        }
     }
 
     public HashMap<Integer, Ticket> getFullMap() {
         HashMap<Integer, Ticket> res = new HashMap<>();
         for (Ticket t : this.fullMap.values()) {
+            if (t.isSold()) {
+                res.put(t.getId(), t.clone());
+            }
+        }
+        return res;
+    }
+
+    public HashMap<Integer, Ticket> getCompleteMap() {
+        HashMap<Integer, Ticket> res = new HashMap<>();
+        for (Ticket t : this.fullMap.values()) {
             res.put(t.getId(), t.clone());
+        }
+        return res;
+    }
+
+    public TreeSet<Ticket> getCompleteSet() {
+        TreeSet<Ticket> res = new TreeSet<>(new TicketComparator());
+        for (Ticket t : this.fullMap.values()) {
+            res.add(t.clone());
         }
         return res;
     }
@@ -41,33 +69,33 @@ public class TicketMap implements Serializable{
     public HashMap<Integer, Ticket> getDinnerMap() {
         HashMap<Integer, Ticket> res = new HashMap<>();
         for (Ticket t : this.dinnerMap.values()) {
-            res.put(t.getId(), t.clone());
+            if (t.isSold()) {
+                res.put(t.getId(), t.clone());
+            }
         }
         return res;
     }
 
-    public void insertNormalTicket(Ticket t) throws ExistingIDException {
-        if (this.fullMap.containsKey(t.getId())) {
-            throw new ExistingIDException(t.getId());
-        } else {
-            this.fullMap.put(t.getId(), t.clone());
-        }
+    public void insertNormalTicket(Ticket t) {
+
+        this.fullMap.put(t.getId(), t.clone());
+        this.lastInsertedId = t.getId();
+
     }
 
-    public void insertDinnerTicket(Ticket t) throws ExistingIDException {
-        if (this.dinnerMap.containsKey(t.getId()) || this.fullMap.containsKey(t.getId())) {
-            throw new ExistingIDException(t.getId());
-        } else {
-            this.dinnerMap.put(t.getId(), t.clone());
-            this.fullMap.put(t.getId(), t.clone());
-        }
+    public void insertDinnerTicket(Ticket t) {
+        this.lastInsertedId = t.getId();
+        this.dinnerMap.put(t.getId(), t.clone());
+        this.fullMap.put(t.getId(), t.clone());
 
     }
 
     public ArrayList<Integer> getDinnerIdArray() {
         ArrayList<Integer> res = new ArrayList<>();
         for (Ticket t : this.dinnerMap.values()) {
-            res.add(t.getId());
+            if (t.isSold()) {
+                res.add(t.getId());
+            }
         }
         return res;
     }
@@ -75,7 +103,9 @@ public class TicketMap implements Serializable{
     public ArrayList<Integer> getFullIdArray() {
         ArrayList<Integer> res = new ArrayList<>();
         for (Ticket t : this.fullMap.values()) {
-            res.add(t.getId());
+            if (t.isSold()) {
+                res.add(t.getId());
+            }
         }
         return res;
     }
@@ -89,29 +119,31 @@ public class TicketMap implements Serializable{
         oos.writeObject(this);
     }
 
-    public TreeSet<Ticket> getFullTickets(){
+    public TreeSet<Ticket> getFullTickets() {
+        return new TreeSet<>(this.getCompleteMap().values());
+    }
+
+    public int getLastInsertedId() {
+        return this.lastInsertedId;
+    }
+
+    public TreeSet<Ticket> getDinnerTickets() {
         TreeSet<Ticket> res = new TreeSet<>(new TicketComparator());
-        for(Ticket t:this.fullMap.values())
+        for (Ticket t : this.dinnerMap.values()) {
             res.add(t.clone());
+        }
         return res;
     }
 
-    
-    public TreeSet<Ticket> getDinnerTickets(){
-        TreeSet<Ticket> res = new TreeSet<>(new TicketComparator());
-        for(Ticket t:this.dinnerMap.values())
-            res.add(t.clone());
-        return res;
-    }
-    
-    public void nullifyNormalTicket(int id){
+    public void nullifyNormalTicket(int id) {
         this.fullMap.remove(id);
     }
-    public void nullifyDinnerTicket(int id){
+
+    public void nullifyDinnerTicket(int id) {
         this.fullMap.remove(id);
         this.dinnerMap.remove(id);
     }
-    
+
     public static TicketMap loadFile() throws FileNotFoundException, IOException, ClassNotFoundException {
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream("data.obj"));
         TicketMap tm = (TicketMap) ois.readObject();

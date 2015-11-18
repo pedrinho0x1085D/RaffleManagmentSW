@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
 public class BuyTicketGUI extends javax.swing.JFrame {
 
     private MainScreenGUI mainscr;
-    private static int howmany=1;
+    private static int howmany = 1;
 
     /**
      * Creates new form BuyTicketGUI
@@ -30,7 +30,7 @@ public class BuyTicketGUI extends javax.swing.JFrame {
         if (this.mainscr.mapa == null) {
             howmany = 1;
         } else {
-            howmany = this.mainscr.mapa.getFullMap().size()+2;
+            howmany = this.mainscr.mapa.getLastInsertedId() + 1;
         }
     }
 
@@ -143,18 +143,15 @@ public class BuyTicketGUI extends javax.swing.JFrame {
         if (jTextField1.getText().equals("") || jFormattedTextField2.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos", "Atenção", JOptionPane.ERROR_MESSAGE);
         } else {
+
+            this.mainscr.mapa.insertNormalTicket(new Ticket((int) jSpinner1.getValue(), jTextField1.getText(), Integer.parseInt(jFormattedTextField2.getText())));
             try {
-                this.mainscr.mapa.insertNormalTicket(new Ticket((int) jSpinner1.getValue(), jTextField1.getText(), Integer.parseInt(jFormattedTextField2.getText())));
-                try {
-                    this.mainscr.mapa.saveFile();
-                } catch (IOException ex) {
-                    Logger.getLogger(BuyTicketGUI.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                this.mainscr.updateLabel();
-                this.dispose();
-            } catch (ExistingIDException ex) {
-                JOptionPane.showMessageDialog(null, "Esse código já existe", "Atenção", JOptionPane.ERROR_MESSAGE);
+                this.mainscr.mapa.saveFile();
+            } catch (IOException ex) {
+                Logger.getLogger(BuyTicketGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
+            this.mainscr.updateLabel();
+            this.dispose();
 
         }
     }//GEN-LAST:event_jButton1ActionPerformed

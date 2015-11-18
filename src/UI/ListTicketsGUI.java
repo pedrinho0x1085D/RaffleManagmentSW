@@ -22,48 +22,41 @@ public class ListTicketsGUI extends javax.swing.JFrame {
     public ListTicketsGUI(TreeSet<Ticket> tickets) {
         initComponents();
         this.tickets = tickets;
-        jList1.setFont(new Font("Tahoma", Font.BOLD, 20));
-        this.setExtendedState(MAXIMIZED_VERT);
+        jTable1.setFont(new Font("Tahoma", Font.BOLD, 20));
+        this.setExtendedState(MAXIMIZED_BOTH);
         fillData();
     }
 
     public void fillData() {
-        /*
-        int i=0, j=0;
-Object[] res = this.tickets.toArray();
-String[][] auxil = new String[(res.length / 10) + 1][10];
-Ticket objaux = null;
-for (i = 0; i < (res.length / 10) || i == 0; i++) {
-  for (j = 0; j < res.length && j < 10; j++) {
-        objaux = ((Ticket) (res[(i * 10) + j]));
-        auxil[i][j] = objaux.getId() + " - " + objaux.getName();
-   }
-}
-if (j != 9) {
-           for(;j<10;j++)
-              auxil[i][j]="";
-      }
-      Object[] header = {"", "", "", "", "", "", "", "", "",""};
-DefaultTableModel dtm = new DefaultTableModel(header, 1) {
 
-  @Override
-      public boolean isCellEditable(int row, int column) {
-                            //Only the third column
-                        return false;
-    	             }
-		         };
-    for (String[] aux : auxil) {
-              dtm.addRow(aux);
-  		         }
-	         jTable1.setModel(dtm);
-
-         */
-        DefaultListModel<String> dtm = new DefaultListModel<>();
-        for (Ticket t : this.tickets) {
-            dtm.addElement(t.getId() + " - " + t.getName());
+        int i = 0, j = 0;
+        Object[] res = this.tickets.toArray();
+        String[][] auxil = new String[(res.length / 10) + 1][10];
+        Ticket objaux = null;
+        for (i = 0; i < (res.length / 10) || i == 0; i++) {
+            for (j = 0; j < res.length && j < 10; j++) {
+                objaux = ((Ticket) (res[(i * 10) + j]));
+                auxil[i][j] = objaux.getId() + " - " + objaux.getName();
+            }
         }
+        if (j != 9) {
+            for (; j < 10; j++) {
+                auxil[i][j] = "";
+            }
+        }
+        Object[] header = {"", "", "", "", "", "", "", "", "", ""};
+        DefaultTableModel dtm = new DefaultTableModel(header, 1) {
 
-        jList1.setModel(dtm);
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //Only the third column
+                return false;
+            }
+        };
+        for (String[] aux : auxil) {
+            dtm.addRow(aux);
+        }
+        jTable1.setModel(dtm);
 
     }
 
@@ -77,8 +70,8 @@ DefaultTableModel dtm = new DefaultTableModel(header, 1) {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Rifas");
@@ -90,12 +83,18 @@ DefaultTableModel dtm = new DefaultTableModel(header, 1) {
             }
         });
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(jList1);
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -104,20 +103,20 @@ DefaultTableModel dtm = new DefaultTableModel(header, 1) {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 779, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
-                        .addGap(0, 289, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addGap(20, 20, 20))
+                .addContainerGap())
         );
 
         pack();
@@ -165,7 +164,7 @@ DefaultTableModel dtm = new DefaultTableModel(header, 1) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

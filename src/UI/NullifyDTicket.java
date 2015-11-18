@@ -27,7 +27,11 @@ public class NullifyDTicket extends javax.swing.JFrame {
 
         initComponents();
         this.gui = cdgui;
-
+        if (this.gui == null) {
+            howmany = 1;
+        } else {
+            howmany = this.gui.map.getLastInsertedId();
+        }
     }
 
     /**
