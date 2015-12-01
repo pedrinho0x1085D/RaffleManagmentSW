@@ -106,7 +106,7 @@ public class SorteioGUI extends javax.swing.JFrame {
         jLabel6.setText("jLabel6");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setText("Rifas elegíveis para 3º prémio: ");
+        jLabel7.setText("Rifas elegíveis para 2º e 3º prémio: ");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("jLabel8");
@@ -146,7 +146,7 @@ public class SorteioGUI extends javax.swing.JFrame {
                                 .addComponent(jLabel5)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel6)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 191, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 329, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -207,7 +207,7 @@ public class SorteioGUI extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new FullSorteioGUI(2,this).setVisible(true);
+        new DinnerSorteioGUI(this,2).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -217,15 +217,15 @@ public class SorteioGUI extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        new DinnerSorteioGUI(this).setVisible(true);
+        new DinnerSorteioGUI(this,3).setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
-    public void updatePrizeWinner(int prize, String name) {
+    public void updatePrizeWinner(int prize, String name,int contacto) {
         if (prize == 1) {
-            jLabel2.setText(name);
+            jLabel2.setText(name+", "+contacto);
         } else if (prize == 2) {
-            jLabel4.setText(name);
+            jLabel4.setText(name+", "+contacto);
         } else {
-            jLabel6.setText(name);
+            jLabel6.setText(name+", "+contacto);
         }
     }
 

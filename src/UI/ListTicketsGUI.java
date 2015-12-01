@@ -22,7 +22,7 @@ public class ListTicketsGUI extends javax.swing.JFrame {
     public ListTicketsGUI(TreeSet<Ticket> tickets) {
         initComponents();
         this.tickets = tickets;
-        jTable1.setFont(new Font("Tahoma", Font.BOLD, 20));
+        jTable1.setFont(new Font("Tahoma", Font.BOLD, 14));
         this.setExtendedState(MAXIMIZED_BOTH);
         fillData();
     }

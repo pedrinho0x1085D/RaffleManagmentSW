@@ -80,8 +80,10 @@ public class SorteioThread implements Runnable{
             fsg.jLabel1.setForeground(Color.green);
         last=Integer.parseInt(fsg.jLabel1.getText());
         winner=this.map.map.getTicket(last).getName();
+        fsg.jLabel4.setText(this.map.map.getTicket(last).getContact()+"");
         fsg.jLabel3.setText(winner);
         fsg.jLabel3.setVisible(true);
+        fsg.jLabel4.setVisible(true);
         fsg.jButton2.setEnabled(true);
     }
     

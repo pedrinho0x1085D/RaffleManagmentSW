@@ -11,19 +11,26 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 /**
  *
  * @author PedroJosé
  */
 public class DinnerSorteioGUI extends javax.swing.JFrame {
+
     SorteioGUI map;
+    int prize;
+
     /**
      * Creates new form DinnerSorteioGUI
      */
-    public DinnerSorteioGUI(SorteioGUI map) {
+    public DinnerSorteioGUI(SorteioGUI map, int prize) {
         initComponents();
-        this.map=map;
+        this.map = map;
+        this.prize = prize;
     }
 
     /**
@@ -40,6 +47,7 @@ public class DinnerSorteioGUI extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -71,27 +79,35 @@ public class DinnerSorteioGUI extends javax.swing.JFrame {
         jLabel2.setToolTipText("");
         jLabel2.setVisible(false);
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setText("jLabel4");
+        jLabel4.setVisible(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(398, 398, 398)
-                .addComponent(jButton2)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(398, 398, 398)
+                        .addComponent(jButton2))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(221, 221, 221)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(274, 274, 274)
-                        .addComponent(jLabel3)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(221, 221, 221)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(274, 274, 274)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,6 +118,8 @@ public class DinnerSorteioGUI extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -115,11 +133,17 @@ public class DinnerSorteioGUI extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         new Thread(new DSorteioThread(map, this)).start();
+        try{
+        AudioInputStream audioIn = AudioSystem.getAudioInputStream(DinnerSorteioGUI.class.getResource("sfx.wav"));
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioIn);
+        clip.start();}
+        catch(Exception e){}
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        this.map.updatePrizeWinner(3, jLabel3.getText());
+        this.map.updatePrizeWinner(this.prize, jLabel3.getText(), Integer.parseInt(jLabel4.getText()));
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -153,7 +177,7 @@ public class DinnerSorteioGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DinnerSorteioGUI(new SorteioGUI(new TicketMap())).setVisible(true);
+                //new DinnerSorteioGUI(new SorteioGUI(new TicketMap())).setVisible(true);
             }
         });
     }
@@ -164,5 +188,6 @@ public class DinnerSorteioGUI extends javax.swing.JFrame {
     javax.swing.JLabel jLabel1;
     javax.swing.JLabel jLabel2;
     javax.swing.JLabel jLabel3;
+    javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }

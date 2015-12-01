@@ -32,7 +32,7 @@ public class BuyDTicket extends javax.swing.JFrame {
         if (this.gui.map == null) {
             howmany = 1;
         } else {
-            howmany = this.gui.map.getLastInsertedId()+1;
+            howmany = this.gui.map.getLastInsertedId()+2;
         }
     }
 

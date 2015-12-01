@@ -30,7 +30,7 @@ public class BuyTicketGUI extends javax.swing.JFrame {
         if (this.mainscr.mapa == null) {
             howmany = 1;
         } else {
-            howmany = this.mainscr.mapa.getLastInsertedId() + 1;
+            howmany = this.mainscr.mapa.getLastInsertedId() + 2;
         }
     }
 

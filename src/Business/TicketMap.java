@@ -120,7 +120,10 @@ public class TicketMap implements Serializable {
     }
 
     public TreeSet<Ticket> getFullTickets() {
-        return new TreeSet<>(this.getCompleteMap().values());
+        TreeSet<Ticket> res= new TreeSet<>(new TicketComparator());
+        for(Ticket t:this.fullMap.values())
+            res.add(t.clone());
+        return res;
     }
 
     public int getLastInsertedId() {
