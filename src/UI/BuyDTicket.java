@@ -8,7 +8,7 @@ package UI;
 import Business.ExistingIDException;
 import Business.Ticket;
 import Business.TicketMap;
-import Business.Timer;
+import Business.ContadorDec;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -195,7 +195,7 @@ public class BuyDTicket extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BuyDTicket(new CountDownGUI(new TicketMap(), new Timer(1))).setVisible(true);
+                new BuyDTicket(new CountDownGUI(new TicketMap(), new ContadorDec(1))).setVisible(true);
             }
         });
     }

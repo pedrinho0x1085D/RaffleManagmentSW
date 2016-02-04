@@ -5,7 +5,7 @@
  */
 package UI;
 
-import Business.Timer;
+import Business.ContadorDec;
 
 /**
  *
@@ -121,7 +121,7 @@ public class PreCountDownGUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new CountDownGUI(this.mainScr.mapa, new Timer((int) jSpinner1.getValue(), (int) jSpinner2.getValue(), (int) jSpinner3.getValue())).setVisible(true);
+        new CountDownGUI(this.mainScr.mapa, new ContadorDec((int) jSpinner1.getValue(), (int) jSpinner2.getValue(), (int) jSpinner3.getValue())).setVisible(true);
         this.mainScr.dispose();
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed

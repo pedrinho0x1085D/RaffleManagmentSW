@@ -6,7 +6,7 @@
 package UI;
 
 import Business.TicketMap;
-import Business.Timer;
+import Business.ContadorDec;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -150,7 +150,7 @@ public class NullifyDTicket extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NullifyDTicket(new CountDownGUI(new TicketMap(), new Timer(1))).setVisible(true);
+                new NullifyDTicket(new CountDownGUI(new TicketMap(), new ContadorDec(1))).setVisible(true);
             }
         });
     }

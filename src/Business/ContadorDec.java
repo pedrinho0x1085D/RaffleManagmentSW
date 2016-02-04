@@ -11,15 +11,15 @@ import java.io.Serializable;
  *
  * @author Pedro Cunha
  */
-public class Timer implements Serializable{
+public class ContadorDec implements Serializable{
 
     int seconds;
 
-    public Timer(int hours, int minutes, int seconds) {
+    public ContadorDec(int hours, int minutes, int seconds) {
         this.seconds = seconds + (minutes * 60) + (hours * 3600);
     }
 
-    public Timer(int seconds) {
+    public ContadorDec(int seconds) {
         this.seconds = seconds;
     }
 
