@@ -112,7 +112,7 @@ public class MainScreenGUI extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Monotype Corsiva", 1, 24)); // NOI18N
-        jLabel2.setText("Cabaz de Natal 2015");
+        jLabel2.setText("Cabaz de Natal 2016");
 
         jLabel3.setFont(new java.awt.Font("Monotype Corsiva", 1, 24)); // NOI18N
         jLabel3.setText("331 S. Dâmaso");

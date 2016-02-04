@@ -156,7 +156,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Monotype Corsiva" size="24" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Cabaz de Natal 2015"/>
+        <Property name="text" type="java.lang.String" value="Cabaz de Natal 2016"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
