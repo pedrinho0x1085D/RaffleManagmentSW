@@ -5,7 +5,18 @@
  */
 package UI;
 
+import Business.PDFMaker;
 import Business.TicketMap;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.JComponent;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -14,6 +25,9 @@ import Business.TicketMap;
 public class SorteioGUI extends javax.swing.JFrame {
 
     TicketMap map;
+    boolean is1prize = false;
+    boolean is2prize = false;
+    boolean is3prize = false;
 
     /**
      * Creates new form SorteioGUI
@@ -60,7 +74,7 @@ public class SorteioGUI extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Sorteio Cabaz Natal");
 
         jButton1.setText("Sorteio para 1º prémio");
@@ -112,12 +126,13 @@ public class SorteioGUI extends javax.swing.JFrame {
         jLabel8.setText("jLabel8");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel9.setText("Rifas elegíveis para 1º e 2º prémios: ");
+        jLabel9.setText("Rifa elegível para 1º prémio: ");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("jLabel10");
 
         jButton4.setText("Terminado");
+        jButton4.setEnabled(false);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -202,30 +217,52 @@ public class SorteioGUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new FullSorteioGUI(1, this).setVisible(true);
+        if (!is1prize) {
+            new FullSorteioGUI(1, this).setVisible(true);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new DinnerSorteioGUI(this,2).setVisible(true);
+        if (!is2prize) {
+            new DinnerSorteioGUI(this, 2).setVisible(true);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+        if (is1prize && is2prize && is3prize) {
+
+            JFileChooser j = new JFileChooser();
+            int ret = j.showSaveDialog(null);
+            if (ret == JFileChooser.APPROVE_OPTION) {
+                new PDFMaker(j.getSelectedFile().getAbsolutePath(), map, Integer.parseInt(jLabel2.getText().split(",")[1].trim()), Integer.parseInt(jLabel4.getText().split(",")[1].trim()), Integer.parseInt(jLabel6.getText().split(",")[1].trim()));
+            }
+
+            this.dispose();
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        new DinnerSorteioGUI(this,3).setVisible(true);
+        if (!is3prize) {
+            new DinnerSorteioGUI(this, 3).setVisible(true);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
-    public void updatePrizeWinner(int prize, String name,int contacto) {
+    public void updatePrizeWinner(int prize, String name, int id) {
         if (prize == 1) {
-            jLabel2.setText(name+", "+contacto);
+            jLabel2.setText(name + ", " + id);
+            is1prize = true;
         } else if (prize == 2) {
-            jLabel4.setText(name+", "+contacto);
+            jLabel4.setText(name + ", " + id);
+            is2prize = true;
         } else {
-            jLabel6.setText(name+", "+contacto);
+            jLabel6.setText(name + ", " + id);
+            is3prize = true;
+        }
+
+        if (is1prize && is2prize && is3prize) {
+            jButton4.setEnabled(true);
         }
     }
 
