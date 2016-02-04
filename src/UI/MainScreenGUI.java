@@ -6,11 +6,16 @@
 package UI;
 
 import Business.TicketMap;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 
 /**
  *
@@ -24,6 +29,11 @@ public class MainScreenGUI extends javax.swing.JFrame {
      * Creates new form MainScreenGUI
      */
     public MainScreenGUI() {
+        try{
+            BufferedImage myImage = ImageIO.read(getClass().getResource("/UI/background1.jpg"));
+            this.setContentPane(new ImagePanel(myImage));
+        }
+        catch(Exception e){}
         initComponents();
         try {
             mapa = TicketMap.loadFile();
@@ -269,4 +279,16 @@ public class MainScreenGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
+class ImagePanel extends JComponent {
+    private Image image;
+    public ImagePanel(Image image) {
+        this.image = image;
+    }
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(image, 0, 0, this);
+    }
+}
+
 }
