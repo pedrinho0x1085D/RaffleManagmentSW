@@ -81,6 +81,7 @@ public class SorteioGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Sorteio Cabaz Natal");
+        setResizable(false);
 
         jButton1.setText("Sorteio para 1º prémio");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

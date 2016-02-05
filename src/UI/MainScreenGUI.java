@@ -73,6 +73,7 @@ public class MainScreenGUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cabaz de Natal ");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/UI/caminheiros.jpg")).getImage());
+        setResizable(false);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/caminheiros.jpg"))); // NOI18N
 

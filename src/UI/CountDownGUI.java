@@ -26,7 +26,7 @@ public class CountDownGUI extends javax.swing.JFrame {
     TicketMap map;
     ContadorDec timer;
     private int counter = 0;
-    private ImageIcon[] image = new ImageIcon[2];
+    private ImageIcon[] image = new ImageIcon[4];
 
     /**
      * Creates new form CountDownGUI
