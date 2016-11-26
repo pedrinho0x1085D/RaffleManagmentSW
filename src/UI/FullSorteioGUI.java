@@ -115,6 +115,7 @@ public class FullSorteioGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        jButton1.setEnabled(false);
         new Thread(new SorteioThread(this.map, this)).start();
         try{
         AudioInputStream audioIn = AudioSystem.getAudioInputStream(FullSorteioGUI.class.getResource("sfx.wav"));

@@ -113,6 +113,7 @@ public class DinnerSorteioGUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        jButton1.setEnabled(false);
         new Thread(new DSorteioThread(map, this)).start();
         try{
         AudioInputStream audioIn = AudioSystem.getAudioInputStream(DinnerSorteioGUI.class.getResource("sfx.wav"));

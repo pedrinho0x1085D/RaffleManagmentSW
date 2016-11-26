@@ -24,12 +24,14 @@ public class TicketMap implements Serializable {
 
     private HashMap<Integer, Ticket> fullMap;
     private HashMap<Integer, Ticket> dinnerMap;
+    private HashMap<String,Supplier> suppliers;
     private int lastInsertedId;
 
     public TicketMap() {
         this.fullMap = new HashMap<>();
         this.dinnerMap = new HashMap<>();
         this.lastInsertedId = 0;
+        this.suppliers = new HashMap<>();
     }
 
     public TicketMap(int howMany) {
@@ -38,6 +40,7 @@ public class TicketMap implements Serializable {
         for (int i = 1; i <= howMany; i++) {
             this.fullMap.put(i, new Ticket(i));
         }
+        this.suppliers = new HashMap<>();
     }
 
     public HashMap<Integer, Ticket> getFullMap() {
@@ -146,10 +149,23 @@ public class TicketMap implements Serializable {
         this.fullMap.remove(id);
         this.dinnerMap.remove(id);
     }
+    
+    public void addSupplier(Supplier supplier){
+        this.suppliers.put(supplier.getSupplierName(),supplier);
+        
+    }
+    
+    public void removeSupplier(String supplierName){
+        this.suppliers.remove(supplierName);
+    }
 
     public static TicketMap loadFile() throws FileNotFoundException, IOException, ClassNotFoundException {
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream("data.obj"));
         TicketMap tm = (TicketMap) ois.readObject();
         return tm;
+    }
+
+    public HashMap<String,Supplier> getSuppliers() {
+        return this.suppliers;
     }
 }

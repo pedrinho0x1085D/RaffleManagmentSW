@@ -7,6 +7,7 @@ package UI;
 
 import Business.TicketMap;
 import Business.ContadorDec;
+import Business.Supplier;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -26,31 +27,54 @@ public class CountDownGUI extends javax.swing.JFrame {
     TicketMap map;
     ContadorDec timer;
     private int counter = 0;
+    private int suppPivot = 0;
     private ImageIcon[] image = new ImageIcon[4];
+    private Supplier[] suppliers;
 
     /**
      * Creates new form CountDownGUI
+     *
      * @param map
      * @param timer
      */
     public CountDownGUI(TicketMap map, ContadorDec timer) {
-        try{
+        try {
             BufferedImage myImage = ImageIO.read(getClass().getResource("/UI/backgroundv1.jpg"));
             this.setContentPane(new ImagePanel(myImage));
+        } catch (Exception e) {
         }
-        catch(Exception e){}
+        int contador = 0;
+        suppliers = new Supplier[map.getSuppliers().size()];
+        for (Supplier supplier : map.getSuppliers().values()) {
+            suppliers[contador] = supplier;
+            contador++;
+        }
         initComponents();
         this.map = map;
         this.timer = timer;
         updateTimer();
         updateLabels("");
         new Thread(new Countdown(this)).start();
-        for(int i=0; i<image.length;i++){
-            image[i]=new ImageIcon(getClass().getResource("/UI/"+i+".jpg"));
+        for (int i = 0; i < image.length; i++) {
+            image[i] = new ImageIcon(getClass().getResource("/UI/" + i + ".jpg"));
         }
         jLabel8.setIcon(image[counter]);
-        Timer t=new Timer(600000, new SlideshowUpdater());
+        if (suppliers.length > 0) {
+            if(suppliers[suppPivot].isLogo()){
+                jLabel10.setText("");
+                ImageIcon temporary = new ImageIcon(suppliers[suppPivot].getPathToImg());
+                ImageIcon shown = new ImageIcon(temporary.getImage().getScaledInstance(500, 100, Image.SCALE_DEFAULT));
+                jLabel10.setIcon(shown);
+            }
+            else{
+                jLabel10.setText(suppliers[suppPivot].getSupplierName());
+                jLabel10.setIcon(null);
+            }
+        }
+        Timer t = new Timer(600000, new SlideshowUpdater());
         t.start();
+        Timer t1 = new Timer(180000, new SupplierUpdater());
+        t1.start();
     }
 
     public void updateLabels(String name) {
@@ -80,6 +104,8 @@ public class CountDownGUI extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -133,6 +159,11 @@ public class CountDownGUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel9.setFont(new java.awt.Font("Script MT Bold", 2, 36)); // NOI18N
+        jLabel9.setText("A IV Secção agradece a:");
+
+        jLabel10.setFont(new java.awt.Font("Segoe Print", 0, 24)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -141,28 +172,19 @@ public class CountDownGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel7))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel6))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel4)))
+                                .addComponent(jLabel4))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel6)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1019, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -170,7 +192,22 @@ public class CountDownGUI extends javax.swing.JFrame {
                                 .addContainerGap())
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10))))))
+                                .addGap(10, 10, 10))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1))
+                            .addComponent(jLabel9)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,7 +237,11 @@ public class CountDownGUI extends javax.swing.JFrame {
                                 .addComponent(jButton3)
                                 .addComponent(jButton4))
                             .addComponent(jButton1))))
-                .addGap(567, 567, 567))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(441, 441, 441))
         );
 
         pack();
@@ -279,6 +320,7 @@ public class CountDownGUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -286,28 +328,51 @@ public class CountDownGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
 
-class SlideshowUpdater implements ActionListener{
+    class SlideshowUpdater implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             counter++;
-            counter%=image.length;
+            counter %= image.length;
             jLabel8.setIcon(image[counter]);
         }
-    
-}
-class ImagePanel extends JComponent {
-    private Image image;
-    public ImagePanel(Image image) {
-        this.image = image;
-    }
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.drawImage(image, 0, 0, this);
-    }
-}
-}
 
+    }
+
+    class ImagePanel extends JComponent {
+
+        private Image image;
+
+        public ImagePanel(Image image) {
+            this.image = image;
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.drawImage(image, 0, 0, this);
+        }
+    }
+
+    class SupplierUpdater implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            suppPivot++;
+            suppPivot %= suppliers.length;
+            if(suppliers[suppPivot].isLogo()){
+                jLabel10.setText("");
+                ImageIcon temporary = new ImageIcon(suppliers[suppPivot].getPathToImg());
+                ImageIcon shown = new ImageIcon(temporary.getImage().getScaledInstance(500, 100, Image.SCALE_DEFAULT));
+                jLabel10.setIcon(shown);
+            }
+            else{
+                jLabel10.setText(suppliers[suppPivot].getSupplierName());
+                jLabel10.setIcon(null);
+            }
+        }
+    }
+}
