@@ -72,9 +72,9 @@ public class CountDownGUI extends javax.swing.JFrame {
                 jLabel10.setIcon(null);
             }
         }
-        Timer t = new Timer(450000, new SlideshowUpdater());
+        Timer t = new Timer(45000, new SlideshowUpdater());
         t.start();
-        Timer t1 = new Timer(180000, new SupplierUpdater());
+        Timer t1 = new Timer(60000, new SupplierUpdater());
         t1.start();
     }
 
@@ -109,6 +109,8 @@ public class CountDownGUI extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Contagem Decrescente");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/UI/caminheiros.jpg")).getImage());
 
         jLabel1.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 48)); // NOI18N
         jLabel1.setText("Tempo");
