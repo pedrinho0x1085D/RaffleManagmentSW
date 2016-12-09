@@ -8,6 +8,7 @@ package UI;
 import Business.TicketMap;
 import Business.ContadorDec;
 import Business.Supplier;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -28,7 +29,7 @@ public class CountDownGUI extends javax.swing.JFrame {
     ContadorDec timer;
     private int counter = 0;
     private int suppPivot = 0;
-    private ImageIcon[] image = new ImageIcon[4];
+    private ImageIcon[] image = new ImageIcon[25];
     private Supplier[] suppliers;
 
     /**
@@ -56,7 +57,7 @@ public class CountDownGUI extends javax.swing.JFrame {
         updateLabels("");
         new Thread(new Countdown(this)).start();
         for (int i = 0; i < image.length; i++) {
-            image[i] = new ImageIcon(getClass().getResource("/UI/" + i + ".jpg"));
+            image[i] = new ImageIcon(getClass().getResource("/UI/slideshow/" + i + ".jpg"));
         }
         jLabel8.setIcon(image[counter]);
         if (suppliers.length > 0) {
@@ -71,7 +72,7 @@ public class CountDownGUI extends javax.swing.JFrame {
                 jLabel10.setIcon(null);
             }
         }
-        Timer t = new Timer(600000, new SlideshowUpdater());
+        Timer t = new Timer(450000, new SlideshowUpdater());
         t.start();
         Timer t1 = new Timer(180000, new SupplierUpdater());
         t1.start();
@@ -368,8 +369,10 @@ public class CountDownGUI extends javax.swing.JFrame {
                 ImageIcon temporary = new ImageIcon(suppliers[suppPivot].getPathToImg());
                 ImageIcon shown = new ImageIcon(temporary.getImage().getScaledInstance(500, 100, Image.SCALE_DEFAULT));
                 jLabel10.setIcon(shown);
+                jLabel10.setBackground(null);
             }
             else{
+                jLabel10.setBackground(Color.WHITE);
                 jLabel10.setText(suppliers[suppPivot].getSupplierName());
                 jLabel10.setIcon(null);
             }
