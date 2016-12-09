@@ -77,7 +77,7 @@ public class MainScreenGUI extends javax.swing.JFrame {
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/UI/caminheiros.jpg")).getImage());
         setResizable(false);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/caminheiros.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/caminheiros.png"))); // NOI18N
 
         jButton1.setText("Inserir Rifa");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
