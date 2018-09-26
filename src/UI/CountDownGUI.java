@@ -8,6 +8,7 @@ package UI;
 import Business.TicketMap;
 import Business.ContadorDec;
 import Business.Supplier;
+import com.sun.glass.events.KeyEvent;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -29,7 +30,7 @@ public class CountDownGUI extends javax.swing.JFrame {
     ContadorDec timer;
     private int counter = 0;
     private int suppPivot = 0;
-    private ImageIcon[] image = new ImageIcon[25];
+    private ImageIcon[] image = new ImageIcon[18];
     private Supplier[] suppliers;
 
     /**
@@ -80,7 +81,6 @@ public class CountDownGUI extends javax.swing.JFrame {
 
     public void updateLabels(String name) {
         this.jLabel4.setText(this.map.getFullMap().size() + "");
-        this.jLabel6.setText(this.map.getDinnerMap().size() + "");
         this.jLabel7.setText(name);
     }
 
@@ -96,8 +96,6 @@ public class CountDownGUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -120,12 +118,6 @@ public class CountDownGUI extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel4.setText("jLabel4");
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel5.setText("Rifas elegíveis para 2º e 3º prémios:");
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel6.setText("jLabel6");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel2.setText("Última rifa comprada por: ");
@@ -163,7 +155,6 @@ public class CountDownGUI extends javax.swing.JFrame {
         });
 
         jLabel9.setFont(new java.awt.Font("Script MT Bold", 2, 36)); // NOI18N
-        jLabel9.setText("A IV Secção agradece a:");
 
         jLabel10.setFont(new java.awt.Font("Segoe Print", 1, 24)); // NOI18N
 
@@ -178,16 +169,12 @@ public class CountDownGUI extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
                                 .addComponent(jLabel7))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel4))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel6)))
+                                .addComponent(jLabel4)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1019, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -210,7 +197,7 @@ public class CountDownGUI extends javax.swing.JFrame {
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(939, Short.MAX_VALUE))))
+                        .addContainerGap(1294, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,11 +212,7 @@ public class CountDownGUI extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jLabel7))
@@ -327,8 +310,6 @@ public class CountDownGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
